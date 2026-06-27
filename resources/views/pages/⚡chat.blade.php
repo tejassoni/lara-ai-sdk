@@ -7,7 +7,7 @@ new class extends Component {
 };
 ?>
 
-<div class="flex min-h-screen overflow-hidden bg-zinc-950">
+<div class="flex h-screen overflow-hidden bg-zinc-950">
     {{-- Side Bar Starts --}}
     <aside class="flex h-screen w-64 flex-shrink-0 flex-col bg-zinc-900 border-r border-zinc-800">
         <div class="flex flex-1 flex-col">

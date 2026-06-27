@@ -109,7 +109,18 @@ new class extends Component {
         </button>
     </header>
 
-    <div class="flex-1 overflow-y-auto px-4 py-6">
+    <div class="flex-1 overflow-y-auto px-4 py-6"
+        x-data="{
+            atBottom: true,
+            scroll() { this.$el.scrollTop = this.$el.scrollHeight; },
+        }"
+        x-init="
+            $nextTick(() => scroll());
+            $el.addEventListener('scroll', () => {
+                atBottom = $el.scrollHeight - $el.scrollTop - $el.clientHeight < 80;
+            });
+            new MutationObserver(() => { if (atBottom) scroll(); }).observe($el, { childList: true, subtree: true });
+        ">
         <div class="mx-auto flex w-full max-w-4xl flex-col gap-4">
             @if (count($chatMessages) > 0)
                 @foreach ($chatMessages as $message)
