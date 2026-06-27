@@ -146,7 +146,7 @@ new class extends Component {
                         </div>
                     </div>
                 @endforeach
-            @else
+            @elseif (! $isLoading)
                 <div class="flex min-h-[calc(100vh-14rem)] items-center justify-center">
                     <div class="w-full max-w-lg rounded-3xl border border-white/10 bg-white/5 p-8 text-center shadow-2xl backdrop-blur">
                         <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-cyan-400 text-lg font-bold text-white shadow-lg shadow-blue-500/25">
@@ -157,6 +157,22 @@ new class extends Component {
                     </div>
                 </div>
             @endif
+
+            <div wire:loading wire:target="sendMessage" class="flex justify-start">
+                <div class="flex max-w-[85%] gap-3 sm:max-w-[78%]">
+                    <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-500 text-xs font-semibold uppercase tracking-wide text-white shadow-lg">
+                        AI
+                    </div>
+                    <div class="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 shadow-xl">
+                        <span class="flex gap-1">
+                            <span class="h-2 w-2 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.3s]"></span>
+                            <span class="h-2 w-2 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.15s]"></span>
+                            <span class="h-2 w-2 animate-bounce rounded-full bg-zinc-400"></span>
+                        </span>
+                        <span class="text-sm text-zinc-400">thinking…</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
