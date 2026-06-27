@@ -2,6 +2,8 @@
 
 use Livewire\Component;
 use App\Ai\Agents\ChatAgent;
+use Illuminate\Support\Facades\Log;
+use Laravel\Ai\Exceptions\RateLimitedException;
 
 new class extends Component {
     public $userInput = '';
@@ -41,12 +43,23 @@ new class extends Component {
                 'isLoading' => $this->isLoading,
                 'content' => $response->text ?? '',
             ];
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            // Log the real exception so failures are visible (not silently swallowed)
+            Log::error('Chat AI request failed', [
+                'message' => $e->getMessage(),
+                'exception' => $e::class,
+            ]);
+
+            // Surface a reason the user can act on
+            $errorMessage = $e instanceof RateLimitedException
+                ? 'The AI service is rate limited right now. Please wait a moment and try again.'
+                : 'An error occurred while processing your request. Please try again later.';
+
             // Handle the exception and set an error message
             $this->chatMessages[] = [
                 'role' => 'assistant',
                 'userInput' => $userInput,
-                'response' => 'An error occurred while processing your request. Please try again later.',
+                'response' => $errorMessage,
                 'timestamp' => now()->toDateTimeString(),
                 'isLoading' => false,
                 'content' => '',

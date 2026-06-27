@@ -2,6 +2,7 @@
 
 namespace App\Ai\Agents;
 
+use Laravel\Ai\Attributes\Model;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Contracts\HasTools;
@@ -10,6 +11,8 @@ use Laravel\Ai\Messages\Message;
 use Laravel\Ai\Promptable;
 use Stringable;
 
+// gemini-2.0-flash free-tier quota is 0 on this key; gemini-2.5-flash-lite has quota.
+#[Model('gemini-2.5-flash-lite')]
 class ChatAgent implements Agent, Conversational, HasTools
 {
     use Promptable;
