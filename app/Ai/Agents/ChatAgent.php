@@ -18,6 +18,14 @@ class ChatAgent implements Agent, Conversational, HasTools
     use Promptable;
 
     /**
+     * @param  array<int, array{role: string, content: string}>  $history  Prior conversation turns.
+     */
+    public function __construct(protected array $history = [])
+    {
+        //
+    }
+
+    /**
      * Get the instructions that the agent should follow.
      */
     public function instructions(): Stringable|string
@@ -49,7 +57,10 @@ PROMPT;
      */
     public function messages(): iterable
     {
-        return [];
+        return array_map(
+            fn (array $m) => new Message($m['role'], $m['content']),
+            $this->history,
+        );
     }
 
     /**

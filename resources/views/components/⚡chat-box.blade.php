@@ -22,6 +22,16 @@ new class extends Component {
         $this->isLoading = true;
         $userInput = $this->userInput;
 
+        // Build conversation history from prior turns so the AI has memory.
+        $history = [];
+        foreach ($this->chatMessages as $m) {
+            $text = $m['role'] === 'user' ? $m['userInput'] : ($m['content'] ?: $m['response']);
+            if (blank($text)) {
+                continue;
+            }
+            $history[] = ['role' => $m['role'], 'content' => $text];
+        }
+
         // User prompt
         $this->chatMessages[] = [
             'role' => 'user',
@@ -33,7 +43,7 @@ new class extends Component {
         ];
 
         try {
-            $response = new ChatAgent()->prompt($userInput);
+            $response = (new ChatAgent($history))->prompt($userInput);
             // AI response
             $this->chatMessages[] = [
                 'role' => 'assistant',
