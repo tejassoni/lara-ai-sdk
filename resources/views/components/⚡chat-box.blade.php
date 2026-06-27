@@ -99,7 +99,7 @@ new class extends Component {
 <div class="flex min-h-0 flex-1 flex-col overflow-hidden bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_32%),linear-gradient(180deg,#111214_0%,#0b0c0f_100%)] text-zinc-100">
     <header class="flex shrink-0 items-center justify-between border-b border-white/10 bg-white/5 px-4 py-4 backdrop-blur">
         <div>
-            <h1 class="text-lg font-semibold tracking-tight text-white">Chat</h1>
+            <h1 class="text-lg font-semibold tracking-tight text-white">Welcome to Tejas Soni : AI Chat Model</h1>
             <p class="mt-1 text-xs text-zinc-400">Ask questions, review answers, and keep the conversation going.</p>
         </div>
 
