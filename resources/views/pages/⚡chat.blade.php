@@ -30,7 +30,7 @@ new class extends Component {
 
         {{-- Footer Status Starts --}}
         <div class="mt-auto flex w-full items-center justify-center border-t border-zinc-800 p-4">
-            <p class="text-sm text-white">Powered by Lara AI SDK</p>
+            <p class="text-sm text-white">Powered by <a href="https://github.com/tejassoni" target="_blank" class="text-blue-400 hover:text-blue-300">Github - @tejassoni</a></p>
         </div>
         {{-- Footer Status Ends --}}
 
